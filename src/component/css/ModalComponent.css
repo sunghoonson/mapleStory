@@ -1,0 +1,95 @@
+/* ModalComponent.css */
+.modal {
+  position: fixed; /* 모달을 고정된 위치에 표시 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* background-color: rgba(0, 0, 0, 0.5); 반투명 배경 */
+   /* 기존의 스타일 유지하면서 추가 */
+  display: flex;
+  flex-direction: column; /* 자식 요소들을 수직으로 쌓음 */
+  align-items: center; /* 가로 중앙 정렬 */
+  justify-content: center; /* 세로 중앙 정렬 */
+  padding: 20px; /* 내부 여백 추가 */
+  box-sizing: border-box; /* 패딩을 너비에 포함 */
+}
+.modal-inner {
+  background: linear-gradient(to bottom, #f0f0f0, #e0e0e0); /* 그라디언트 배경 추가 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  /* padding: 10px; 내부 여백 */
+  /* width: 600px; 모달창의 너비를 고정값으로 설정, 필요에 따라 조정 */
+  /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15); 외부 그림자 추가 */
+}
+
+.modal-header {
+  cursor: grab; /* 드래그 가능함을 나타내는 커서 스타일 */
+  background-color: #e0e0e0; /* 배경 색상을 콘텐츠와 동일하게 설정 */
+  z-index: 10; /* 모달 콘텐츠 위에 헤더가 오도록 z-index 설정 */
+  padding: 10px 20px; /* 양쪽 패딩을 콘텐츠와 동일하게 설정 */
+  box-sizing: border-box; /* 패딩을 너비에 포함 */
+  display: flex; /* 플렉스박스 레이아웃을 사용 */
+  justify-content: flex-end; /* 버튼을 우측으로 이동 */
+  align-items: center; 
+}
+.modal-header button {
+  border: none; /* 테두리 제거 */
+  background-color: #f0f0f0; /* 버튼의 배경색 */
+  cursor: pointer;
+  border-radius: 5px; /* 버튼의 모서리 둥글게 */  
+  padding: 5px 10px;
+  font-size: 1rem; 
+  }
+.modal-content {
+  max-width: 600px;
+  background: linear-gradient(145deg, #fafafa, #eaeaea); /* 그라디언트 배경 추가 */
+  padding: 20px;
+  border-radius: 12px; /* 모서리 둥글게 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  display: grid;
+  grid-template-columns: repeat(5, 60px); /* 60px 크기의 5열 격자 */
+  grid-template-rows: repeat(6, 60px); /* 60px 크기의 6행 격자 */
+  grid-gap: 10px; /* 격자 사이의 간격 */
+  justify-items: center; /* 가로 중앙 정렬 */
+  align-items: center;
+  grid-gap: 15px; /* 격자 사이의 간격 */
+  box-sizing: border-box;
+}
+/* 아이템 이미지 크기 조정 */
+.modal-content img {
+width: 50px; /* 이미지 크기 설정 */
+height: 50px; /* 이미지 크기 설정 */
+object-fit: contain; /* 이미지 비율 유지 */
+}
+
+.tooltip {
+  position: fixed;
+  background-color: white;
+  padding: 8px 12px; /* 내부 여백 조정 */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+  z-index: 100;
+  white-space: normal; /* 줄바꿈 허용 */
+  
+  overflow: hidden; /* 넘치는 내용 숨김 처리 */
+  text-overflow: ellipsis; /* 넘친 내용을 말줄임표로 표시 */
+  box-sizing: border-box; /* 박스 사이즈 계산 방법 */
+  
+}
+
+
+.item-container {
+  display: flex; /* 아이템과 라벨을 위한 플렉스 컨테이너 설정 */
+  flex-direction: column; /* 아이템 위에 텍스트 라벨이 오도록 정렬 */
+  align-items: center; /* 가로 중앙 정렬 */
+  grid-column: span 1; /* 아이템이 차지할 열의 수 */
+  grid-row: span 1; /* 아이템이 차지할 행의 수 */
+}
+
+.item-label {
+  margin-top: 5px; /* 아이템과 라벨 사이의 간격 */
+  font-size: 0.75rem; 
+  color: #333; 
+  text-align: center; 
+}

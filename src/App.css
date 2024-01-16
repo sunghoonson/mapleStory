@@ -1,0 +1,21 @@
+/* App.css*/
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 세 열로 나눔 */
+  grid-template-rows: repeat(3, 1fr); /* 세 행으로 나눔 */
+  height: 100vh;
+  gap: 10px; /* 영역 사이의 간격 */
+  padding-top: 10px; /* 헤더가 나타날 수 있는 공간을 위해 상단에 패딩 추가 */
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid lightgray; /* 경계선 표시 */
+  transition: background-color 0.3s; /* 배경색 변경 효과 */
+}
+
+.grid-item:hover {
+  background-color: lightblue; /* 마우스 호버 시 배경색 변경 */
+}
