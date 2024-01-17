@@ -2,7 +2,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - master  # 또는 메인 브랜치에 따라 변경
+      - main  # 또는 메인 브랜치에 따라 변경
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
