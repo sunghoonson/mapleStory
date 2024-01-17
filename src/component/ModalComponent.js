@@ -8,7 +8,7 @@ import { closeModal } from '../features/myModalSlice';
 import './css/ModalComponent.css';
 import DraggableImage from './DraggableImage';
 import Tooltip from './Tooltip';
-
+//test
 function ModalComponent({ itemData }) {
   const dispatch = useDispatch();
   const [items, setItems] = useState(itemData.item_equipment);
