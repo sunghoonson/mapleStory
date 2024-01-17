@@ -24,10 +24,8 @@ function Tooltip({ tooltip, posX, posY }) {
       {shouldRender(tooltip.item_total_option['luk']) && <div style={{color:'#46D2D2'}}>LUK : +{tooltip.item_total_option['luk']}()</div>}
       {shouldRender(tooltip.item_total_option['max_hp']) && <div style={{color:'#46D2D2'}}>최대HP : +{tooltip.item_total_option['max_hp']}()</div>}
       {shouldRender(tooltip.item_total_option['max_mp']) && <div style={{color:'#46D2D2'}}>최대MP : +{tooltip.item_total_option['max_mp']}()</div>}
-      {/* ... 나머지 조건부 렌더링들 ... */}
       {shouldRender(tooltip.item_total_option['attack_power']) && <div style={{color:'#46D2D2'}}>공격력 : +{tooltip.item_total_option['attack_power']}()</div>}
       {shouldRender(tooltip.item_total_option['magic_power']) && <div style={{color:'#46D2D2'}}>마력 : +{tooltip.item_total_option['magic_power']}()</div>}
-      {/* 추가 정보를 여기에 표시 */}
     </div>
   );
 }

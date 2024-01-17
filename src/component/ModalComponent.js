@@ -8,7 +8,7 @@ import { closeModal } from '../features/myModalSlice';
 import './css/ModalComponent.css';
 import DraggableImage from './DraggableImage';
 import Tooltip from './Tooltip';
-//test
+
 function ModalComponent({ itemData }) {
   const dispatch = useDispatch();
   const [items, setItems] = useState(itemData.item_equipment);
@@ -19,12 +19,24 @@ function ModalComponent({ itemData }) {
   };
 
   const moveImage = (dragIndex, hoverIndex) => {
-    const dragItem = items[dragIndex];
     const newItems = [...items];
-    newItems.splice(dragIndex, 1);
-    newItems.splice(hoverIndex, 0, dragItem);
+    const dragItem = {...newItems[dragIndex]};
+    const hoverItem = {...newItems[hoverIndex]};
+  
+    // gridArea 속성 교환
+    const tempGridArea = dragItem.gridArea;
+    dragItem.gridArea = hoverItem.gridArea;
+    hoverItem.gridArea = tempGridArea;
+  
+    // 아이템 위치 변경
+    newItems[dragIndex] = hoverItem;
+    newItems[hoverIndex] = dragItem;
+  
+    // 상태 업데이트
     setItems(newItems);
   };
+  
+  
   
   const handleMouseEnter = (e, itemName) => {
     const item = items.find(item => item.item_name === itemName);
@@ -52,8 +64,6 @@ function ModalComponent({ itemData }) {
             </div>
             <div className="modal-content">
               {items.map((item, index) => {
-               // 격자 번호를 아이템 데이터에 추가해야 합니다.
-              // 예를 들면, item.gridArea = '1 / 3 / 1 / 4'와 같이 설정할 수 있습니다.
               const style = { gridArea: item.gridArea || 'auto' }; // gridArea가 없다면 'auto' 사용
               return (
                 <div key={item.id} className="item-container" style={style}>
