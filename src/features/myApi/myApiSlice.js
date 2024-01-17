@@ -29,7 +29,7 @@ export const fetchCharacterData = createAsyncThunk(
         dispatch(setOcid(data1.ocid));
 
         const data2 = await fetchCharacterDetails(data1.ocid, yesterdayDate);
-        console.log("Second Response:", data2);
+        console.log("Second Response:", data2);  
         return data2;
       } else {
         throw new Error("Invalid ocid or no ocid in first response");
@@ -40,6 +40,44 @@ export const fetchCharacterData = createAsyncThunk(
   }
 );
 
+function calculateGridArea(itemSlot) {
+  const gridAreaMap = {
+    '반지4': "1 / 1 / 1 / 2",
+    '반지3': "2 / 1 / 2 / 2",
+    '반지2': "3 / 1 / 3 / 2",
+    '반지1': "4 / 1 / 4 / 2",
+    '포켓 아이템': "5 / 1 / 5 / 2",
+
+    '펜던트2': "2 / 2 / 2 / 2",
+    '펜던트': "3 / 2 / 3 / 2",
+    '무기': "4 / 2/ 4 / 2",
+    '벨트': "5 / 2 / 5 / 2",
+
+    '모자': "1 / 3 / 1 / 3",
+    '얼굴장식': "2 / 3 / 2 / 3",
+    '눈장식': "3 / 3 / 3 / 3",
+    '상의': "4 / 3 / 4 / 3",
+    '하의': "5 / 3 / 5 / 3",
+    '신발': "6 / 3 / 6 / 3",
+    
+    '훈장': "1 / 4 / 1 / 4",
+    '귀고리': "3 / 4 / 3 / 4",
+    '어깨장식': "4 / 4 / 4 / 4",
+    '장갑': "5 / 4 / 5 / 4",
+    //'귀고리': "6 / 4 / 6 / 4",
+
+    '엠블렘': "1 / 5 / 1 / 5",
+    '뱃지': "2 / 5 / 2 / 5",
+    //'엠블렘': "3 / 5 / 3 / 5",
+    '보조무기': "4 / 5 / 4 / 5",
+    '망토': "5 / 5 / 5 / 5",
+    '기계 심장': "6 / 5 / 6 / 5",
+    // 여기에 다른 매핑 추가
+  };
+
+  return gridAreaMap[itemSlot] || "기본값"; // 기본값 설정
+}
+
 export const fetchItemData = createAsyncThunk(
   'myApi/fetchItem',
   async (_, { getState }) => {
@@ -47,6 +85,12 @@ export const fetchItemData = createAsyncThunk(
       const state = getState();
       const ocid = state.myApi.ocid;
       const data = await fetchItemApi(ocid, getYesterdayDate());
+      
+      if (data && data.item_equipment) {
+        for (let i = 0; i < data.item_equipment.length; i++) {
+          data.item_equipment[i].gridArea = calculateGridArea(data.item_equipment[i].item_equipment_slot);
+        }
+      }
       return data;
     } catch (error) {
       throw error; // 에러 핸들링

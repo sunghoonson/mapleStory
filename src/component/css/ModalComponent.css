@@ -15,7 +15,7 @@
   box-sizing: border-box; /* 패딩을 너비에 포함 */
 }
 .modal-inner {
-  background: linear-gradient(to bottom, #f0f0f0, #e0e0e0); /* 그라디언트 배경 추가 */
+  /* background: linear-gradient(to bottom, #f0f0f0, #e0e0e0);  */
   border-radius: 10px; /* 모서리 둥글게 */
   /* padding: 10px; 내부 여백 */
   /* width: 600px; 모달창의 너비를 고정값으로 설정, 필요에 따라 조정 */
@@ -42,14 +42,13 @@
   }
 .modal-content {
   max-width: 600px;
-  background: linear-gradient(145deg, #fafafa, #eaeaea); /* 그라디언트 배경 추가 */
+  background: linear-gradient(145deg, rgba(250, 250, 250, 0.5), rgba(234, 234, 234, 0.5)); /* RGBA 그라디언트 배경으로 변경 */
   padding: 20px;
   border-radius: 12px; /* 모서리 둥글게 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
   display: grid;
   grid-template-columns: repeat(5, 60px); /* 60px 크기의 5열 격자 */
   grid-template-rows: repeat(6, 60px); /* 60px 크기의 6행 격자 */
-  grid-gap: 10px; /* 격자 사이의 간격 */
   justify-items: center; /* 가로 중앙 정렬 */
   align-items: center;
   grid-gap: 15px; /* 격자 사이의 간격 */
@@ -63,17 +62,19 @@ object-fit: contain; /* 이미지 비율 유지 */
 }
 
 .tooltip {
-  position: fixed;
-  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translateX(posX) translateY(posY);
+  background-color: rgba(51, 51, 51, 0.7); /* 어두운 배경색에 투명도 0.8 적용 */
+  color: #fff; /* 밝은 글자색 */
   padding: 8px 12px; /* 내부 여백 조정 */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.18);
+  border-radius: 4px; /* 모서리 둥글게 처리 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.18); /* 그림자 효과 추가 */
   z-index: 100;
-  white-space: normal; /* 줄바꿈 허용 */
-  
-  overflow: hidden; /* 넘치는 내용 숨김 처리 */
-  text-overflow: ellipsis; /* 넘친 내용을 말줄임표로 표시 */
+  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+  font-size: 14px; /* 텍스트 사이즈 조정 */
   box-sizing: border-box; /* 박스 사이즈 계산 방법 */
   
 }

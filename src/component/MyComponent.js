@@ -14,6 +14,7 @@ function MyComponent() {
   const [characterName, setCharacterName] = useState('');
   const ocid = useSelector(state => state.myApi.ocid);
   const itemData = useSelector(state => state.myApi.item); // API를 통해 가져온 데이터
+  const isLoading = useSelector(state => state.myApi.loading); // 로딩 상태 확인
 
   const handleOpenModal = () => {
     dispatch(openModal());
@@ -55,7 +56,10 @@ function MyComponent() {
           <h3>Character Information</h3>
           <div><strong>Date:</strong> {data.date}</div>
           <div><strong>Name:</strong> {data.character_name}</div>
-          <div><strong>World:</strong> {data.world_name}<button type="button" onClick={handleOpenModal}>아이템 창</button>{isModalOpen && <ModalComponent itemData={itemData}/>}</div>
+          <div><strong>World:</strong> {data.world_name}<button type="button" onClick={handleOpenModal}>아이템 창
+            </button>{isModalOpen && <ModalComponent itemData={itemData}/>}
+                    {isModalOpen && isLoading && <div>로딩 중...</div>}
+          </div>
           <div><strong>Gender:</strong> {data.character_gender}</div>
           <div><strong>Class:</strong> {data.character_class} (Level: {data.character_class_level})</div>
           <div><strong>Level:</strong> {data.character_level}</div>

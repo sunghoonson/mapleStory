@@ -28,11 +28,13 @@ function ModalComponent({ itemData }) {
   
   const handleMouseEnter = (e, itemName) => {
     const item = items.find(item => item.item_name === itemName);
+    const modal = document.querySelector('.modal'); // 모달 요소 선택
+    const modalRect = modal.getBoundingClientRect(); // 모달의 위치 및 크기 정보
     console.log(item)
     setTooltip({
       ...item,
-      posX: e.clientX,
-      posY: e.clientY
+      posX: e.clientX - modalRect.left,
+      posY: e.clientY - modalRect.top
     });
   };
 
