@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './css/InfoModalComponent.css';
 import { closeModal } from '../features/myModalSlice';
-
+//test
 function ModalComponent() {
   const dispatch = useDispatch();
   const handleClose = () => {

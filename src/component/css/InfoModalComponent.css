@@ -98,5 +98,5 @@ object-fit: contain; /* 이미지 비율 유지 */
 .spot-line {
   border-top: 1px dashed #ccc; /* 상단 점선 추가 */
   padding-top: 5px; /* 점선과 텍스트 사이 여백 */
-  margin-top: 5px; /* 점선 위 여백 추가 (필요시 조절) */
+  margin-top: 5px; /* 점선 위 여백 추가 (필요시 조절) test*/
 }
