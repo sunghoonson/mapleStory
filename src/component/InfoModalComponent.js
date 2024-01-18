@@ -1,7 +1,7 @@
-// ModalComponent.js
+// InfoModalComponent.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import './css/ModalComponent.css';
+import './css/InfoModalComponent.css';
 import { closeModal } from '../features/myModalSlice';
 
 function ModalComponent() {
@@ -11,7 +11,6 @@ function ModalComponent() {
   };
 
   return (
-    
         <div className="modal">
           <div className="modal-inner">
             <div className="modal-header">
