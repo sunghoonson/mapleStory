@@ -15,7 +15,7 @@ function ModalComponent({ itemData }) {
   const [tooltip, setTooltip] = useState(null);
 
   const handleClose = () => {
-    dispatch(closeModal());
+    dispatch(closeModal({modalName: 'modal'}));
   };
 
   const moveImage = (dragIndex, hoverIndex) => {

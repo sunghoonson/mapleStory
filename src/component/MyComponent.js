@@ -3,12 +3,15 @@ import { useSelector, useDispatch } from 'react-redux'; // useSelector와 useDis
 import { fetchCharacterData } from '../features/myApi/myApiSlice'; // fetchCharacter를 해당 위치에서 임포트
 import './css/MyComponent.css'; // CSS 파일을 임포트
 import ModalComponent from './ModalComponent';
+import InfoModalComponent from './InfoModalComponent';
 import { openModal } from '../features/myModalSlice'; // openModal을 임포트
 import { fetchItemData } from '../features/myApi/myApiSlice';
 
 function MyComponent() {
 
-  const isModalOpen = useSelector(state => state.myModal.isOpen);
+  const modalsState = useSelector((state) => state.myModal.modals);
+  const isModalOpen = modalsState.modal
+  const isInfoModalOpen = modalsState.infomodal
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state.myApi);
   const [characterName, setCharacterName] = useState('');
@@ -17,12 +20,17 @@ function MyComponent() {
   const isLoading = useSelector(state => state.myApi.loading); // 로딩 상태 확인
 
   const handleOpenModal = () => {
-    dispatch(openModal());
+    dispatch(openModal({modalName: 'modal'}));
     if (ocid) {
       dispatch(fetchItemData());
     }
   };
-
+  const handleOpenInfoModal = () => {
+    dispatch(openModal({ modalName: 'infomodal' }));
+    if (ocid) {
+      // 필요한 경우 다른 액션을 디스패치
+    }
+  };
   const handleInputChange = (e) => {
     setCharacterName(e.target.value);
   };
@@ -55,7 +63,10 @@ function MyComponent() {
         <div>
           <h3>Character Information</h3>
           {/* <div><strong>Date:</strong> {data.date}</div> */}
-          <div><strong>Name:</strong> {data.character_name}</div>
+          <div><strong>Name:</strong> {data.character_name}<button type="button" onClick={handleOpenInfoModal}>캐릭터 정보
+            </button>{isInfoModalOpen && <InfoModalComponent ocid={ocid}/>}
+                    {isInfoModalOpen && isLoading && <div>로딩 중...</div>}
+          </div>
           <div><strong>World:</strong> {data.world_name}<button type="button" onClick={handleOpenModal}>아이템 창
             </button>{isModalOpen && <ModalComponent itemData={itemData}/>}
                     {isModalOpen && isLoading && <div>로딩 중...</div>}

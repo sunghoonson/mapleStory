@@ -72,13 +72,13 @@ object-fit: contain; /* 이미지 비율 유지 */
   border-radius: 4px; /* 모서리 둥글게 처리 */
   box-shadow: 0 2px 4px rgba(0,0,0,0.18); /* 그림자 효과 추가 */
   z-index: 100;
-  white-space: nowrap; /* 텍스트를 한 줄로 표시 */
   text-align: center; /* 텍스트 중앙 정렬 */
   font-size: 14px; /* 텍스트 사이즈 조정 */
   box-sizing: border-box; /* 박스 사이즈 계산 방법 */
-  
+  width: 350px; /* 배경의 너비를 200px로 고정 */
+  word-wrap: break-word; /* 단어가 너비를 초과할 경우 자동으로 줄바꿈 */
+  overflow-wrap: break-word; /* 단어가 너비를 초과할 경우 자동으로 줄바꿈 (word-wrap과 유사) */
 }
-
 
 .item-container {
   display: flex; /* 아이템과 라벨을 위한 플렉스 컨테이너 설정 */
@@ -93,4 +93,10 @@ object-fit: contain; /* 이미지 비율 유지 */
   font-size: 0.75rem; 
   color: #333; 
   text-align: center; 
+}
+
+.spot-line {
+  border-top: 1px dashed #ccc; /* 상단 점선 추가 */
+  padding-top: 5px; /* 점선과 텍스트 사이 여백 */
+  margin-top: 5px; /* 점선 위 여백 추가 (필요시 조절) */
 }
