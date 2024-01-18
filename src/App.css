@@ -19,3 +19,18 @@
 .grid-item:hover {
   background-color: lightblue; /* 마우스 호버 시 배경색 변경 */
 }
+
+/* 화면 크기에 따른 미디어 쿼리 */
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* 화면이 작을 때 2열로 변경 */
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr; /* 더 작은 화면에서 1열로 변경 */
+  }
+}
+/* 모달, 툴팁, 아이템 컨테이너 등의 스타일을 화면 크기에 맞게 조정 */

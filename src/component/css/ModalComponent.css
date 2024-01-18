@@ -100,3 +100,13 @@ object-fit: contain; /* 이미지 비율 유지 */
   padding-top: 5px; /* 점선과 텍스트 사이 여백 */
   margin-top: 5px; /* 점선 위 여백 추가 (필요시 조절) */
 }
+
+@media screen and (max-width: 480px) {
+  .modal-inner {
+    max-width: 90%; /* 모달의 최대 너비를 화면 너비의 90%로 설정 */
+  }
+
+  .tooltip {
+    width: auto; /* 툴팁의 너비를 자동으로 조정 */
+  }
+}
