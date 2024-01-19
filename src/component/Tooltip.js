@@ -17,13 +17,13 @@ function Tooltip({ tooltip}) {
       case '레어':
        return 'skyblue';
       case '에픽':
-        return '#d09aff'; 
+        return '#d09aff'; //보라
       case '유니크':
         return 'gold'; 
       case '레전드리':
         return 'lightgreen'; 
       default:
-        return 'white'; // 
+        return 'white';
     }
   }
 
