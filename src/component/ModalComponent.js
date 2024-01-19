@@ -1,5 +1,5 @@
 // ModalComponent.js
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Draggable from 'react-draggable';
 import { DndProvider} from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -17,6 +17,41 @@ function ModalComponent({ itemData }) {
   const handleClose = () => {
     dispatch(closeModal({modalName: 'modal'}));
   };
+
+  const handleClick = (itemName) => {
+    const item = items.find(item => item.item_name === itemName);
+    setTooltip(item); // 클릭된 아이템의 정보로 툴팁 설정
+  };
+
+  const handleCloseTooltip = () => {
+    setTooltip(null); // 툴팁 닫기
+  };
+
+  useEffect(() => {
+    // Escape 키 이벤트 핸들러
+    const handleEscape = (e) => {
+      if (e.key === 'Escape') {
+        handleCloseTooltip();
+      }
+    };
+
+    // 모달 밖 클릭 이벤트 핸들러
+    const handleClickOutside = (e) => {
+      if (!e.target.closest('.modal-content') && tooltip) {
+        handleCloseTooltip();
+      }
+    };
+
+    // 이벤트 리스너 등록
+    document.addEventListener('keydown', handleEscape);
+    document.addEventListener('click', handleClickOutside);
+
+    // 클린업 함수
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [tooltip]); // 의존성 배열에 tooltip 추가
 
   const moveImage = (dragIndex, hoverIndex) => {
     const newItems = [...items];
@@ -36,23 +71,7 @@ function ModalComponent({ itemData }) {
     setItems(newItems);
   };
   
-  
-  
-  const handleMouseEnter = (e, itemName) => {
-    const item = items.find(item => item.item_name === itemName);
-    const modal = document.querySelector('.modal'); // 모달 요소 선택
-    const modalRect = modal.getBoundingClientRect(); // 모달의 위치 및 크기 정보
-    console.log(item)
-    setTooltip({
-      ...item,
-      posX: e.clientX - modalRect.left,
-      posY: e.clientY - modalRect.top
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setTooltip(null);
-  };
+    
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -66,15 +85,14 @@ function ModalComponent({ itemData }) {
               {items.map((item, index) => {
               const style = { gridArea: item.gridArea || 'auto' }; // gridArea가 없다면 'auto' 사용
               return (
-                <div key={item.id} className="item-container" style={style}>
+                <div key={item.id} className="item-container" style={style} onClick={() => handleClick(item.item_name)}>
                   <DraggableImage
                     id={item.id}
                     src={item.item_icon}
                     name={item.item_name}
                     index={index}
                     moveImage={moveImage}
-                    handleMouseEnter={handleMouseEnter}
-                    handleMouseLeave={handleMouseLeave}
+                    handleClick={handleClick} // Make sure the prop is named correctly
                   />
                   <div className="item-label">{item.item_equipment_slot}</div> {/* 아이템 이름 라벨 추가 */}
                 </div>
@@ -82,8 +100,8 @@ function ModalComponent({ itemData }) {
               {tooltip && (
                 <Tooltip
                   tooltip={tooltip}
-                  posX={tooltip.posX}
-                  posY={tooltip.posY}
+                  // posX={tooltip.posX}
+                  // posY={tooltip.posY}
                 />
               )}
             </div>

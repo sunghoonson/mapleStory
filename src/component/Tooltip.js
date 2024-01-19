@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Tooltip({ tooltip, posX, posY }) {
+function Tooltip({ tooltip}) {
   // 값이 0, null, 또는 undefined가 아닌지 확인하는 함수
   const shouldRender = value => {
     if (typeof value === 'string' && value !== '0') {
@@ -31,8 +31,10 @@ function Tooltip({ tooltip, posX, posY }) {
     <div
       className="tooltip"
       style={{
-        left: posX + 'px',
-        top: (posY + 15) + 'px'
+        position: 'fixed',
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)'
       }}
     >
       {shouldRender(tooltip.starforce) && <div style={{color:'yellow'}}>{tooltip.starforce}성</div>}
