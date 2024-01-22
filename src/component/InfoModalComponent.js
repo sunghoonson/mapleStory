@@ -16,7 +16,8 @@ function ModalComponent() {
     setShowDetail(!showDetail); // 디테일 버튼 클릭 시 상태를 true로 변경하여 모달을 표시
   };
 
-  const { data} = useSelector((state) => state.myApi);
+  const { data,setItem} = useSelector((state) => state.myApi);
+  console.log(setItem)
   return (
     
     <Draggable handle=".infomodal-header">
@@ -52,10 +53,31 @@ function ModalComponent() {
 
 // 디테일 모달 컴포넌트
 function DetailModal({ onClose }) {
-  return (
+  // 현재 활성화된 탭을 관리하는 상태
+  const [activeTab, setActiveTab] = useState(1);
+
+  // 탭 클릭 핸들러
+  const handleTabClick = (tabNumber) => {
+    setActiveTab(tabNumber);
+  };
+
+return (
     <div className="detail-modal">
       <div className="infomodalcharacter-info">Character Info</div>
-      {/* 여기에 자세한 정보를 표시하는 내용을 넣습니다. */}
+      <div className="tabs">
+        <button onClick={() => handleTabClick(1)}>Tab 1</button>
+        <button onClick={() => handleTabClick(2)}>Tab 2</button>
+        <button onClick={() => handleTabClick(3)}>Tab 3</button>
+        <button onClick={() => handleTabClick(4)}>Tab 4</button>
+        <button onClick={() => handleTabClick(5)}>Tab 5</button>
+      </div>
+      <div className="tab-content">
+        {activeTab === 1 && <div>Content for Tab 1</div>}
+        {activeTab === 2 && <div>Content for Tab 2</div>}
+        {activeTab === 3 && <div>Content for Tab 3</div>}
+        {activeTab === 4 && <div>Content for Tab 4</div>}
+        {activeTab === 5 && <div>Content for Tab 5</div>}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 // features/myApi/myApiSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCharacterId, fetchCharacterData as fetchCharacterDetails,fetchItemData as fetchItemApi } from './mapleStoryApi.js';
+import { fetchCharacterId, fetchCharacterData as fetchCharacterDetails,fetchItemData as fetchItemApi, fetchItemSet_EffectData as fetchItemSetEffectData } from './mapleStoryApi.js';
 
 //어제 날짜 가져오기
 const getYesterdayDate = () => {
@@ -31,6 +31,27 @@ export const fetchCharacterData = createAsyncThunk(
         const data2 = await fetchCharacterDetails(data1.ocid, yesterdayDate);
         console.log("Second Response:", data2);  
         return data2;
+      } else {
+        throw new Error("Invalid ocid or no ocid in first response");
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const fetchItemSet_EffectData = createAsyncThunk(
+  'myApi/fetchItemSet_EffectData',
+  async (_, { getState }) => {
+    try {
+      const state = getState();
+      const ocid = state.myApi.ocid;
+      const data = await fetchItemSetEffectData(ocid, getYesterdayDate());
+
+
+      if (data) {
+        console.log(data)
+        return data;
       } else {
         throw new Error("Invalid ocid or no ocid in first response");
       }
@@ -105,6 +126,7 @@ export const myApiSlice = createSlice({
     initialState: {
       data: null,
       item: null, // 아이템 데이터 상태 추가
+      setItem: null,
       ocid: null, // ocid 상태 추가
       loading: false,
       error: null,
@@ -137,6 +159,17 @@ export const myApiSlice = createSlice({
         state.item = action.payload; // 아이템 데이터 저장
       })
       .addCase(fetchItemData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(fetchItemSet_EffectData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(fetchItemSet_EffectData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.setItem = action.payload; // 아이템 세트 효과 데이터 저장
+      })
+      .addCase(fetchItemSet_EffectData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       });

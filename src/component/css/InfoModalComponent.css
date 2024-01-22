@@ -7,7 +7,7 @@
   bottom: 0;
   /* background-color: rgba(0, 0, 0, 0.5); 반투명 배경 */
   justify-content: flex-start; /* 세로 방향 정렬을 상단으로 변경 */
-  padding-top: 30px; /* 상단 여백 추가 */
+  padding-top: 60px; /* 상단 여백 추가 */
   display: flex;
   flex-direction: column; /* 자식 요소들을 수직으로 쌓음 */
   align-items: center; /* 가로 중앙 정렬 */

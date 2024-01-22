@@ -5,7 +5,7 @@ import './css/MyComponent.css'; // CSS 파일을 임포트
 import ModalComponent from './ModalComponent';
 import InfoModalComponent from './InfoModalComponent';
 import { openModal } from '../features/myModalSlice'; // openModal을 임포트
-import { fetchItemData } from '../features/myApi/myApiSlice';
+import { fetchItemData,fetchItemSet_EffectData } from '../features/myApi/myApiSlice';
 
 function MyComponent() {
 
@@ -29,6 +29,7 @@ function MyComponent() {
     dispatch(openModal({ modalName: 'infomodal' }));
     if (ocid) {
       // 필요한 경우 다른 액션을 디스패치
+      dispatch(fetchItemSet_EffectData());
     }
   };
   const handleInputChange = (e) => {
