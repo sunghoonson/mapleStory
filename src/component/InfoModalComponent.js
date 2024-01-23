@@ -60,6 +60,20 @@ function DetailModal({ data }) {
   const handleTabClick = (tabNumber) => {
     setActiveTab(tabNumber);
   };
+  
+  function addCommas(number) {
+    // 숫자를 문자열로 변환
+    const numStr = number.toString();
+    
+    // 소수점 분리 (정수 부분과 소수점 부분으로)
+    const parts = numStr.split('.');
+
+    // 정규 표현식을 사용하여 콤마 추가
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    // 정수 부분과 소수점 부분을 다시 합침
+    return parts.join('.');
+}
 
 return (
     <div className="detail-modal">
@@ -75,8 +89,34 @@ return (
         <div>
           <div className="flex-container">
             <div className="flex-item">{data.detail.final_stat[42].stat_name}</div>
-            <div className="flex-item">{data.detail.final_stat[42].stat_value}</div>
+            <div className="flex-item">{addCommas(data.detail.final_stat[42].stat_value)}</div>
             <div className="flex-item">?</div>
+          </div>
+          <div className='stat-container'>
+            <div>
+              <div>{data.detail.final_stat[20].stat_name}</div>
+              <div>{data.detail.final_stat[20].stat_value}</div>
+            </div>
+            <div>
+              <div>{data.detail.final_stat[21].stat_name}</div>
+              <div>{data.detail.final_stat[21].stat_value}</div>
+            </div>
+            <div>
+              <div>{data.detail.final_stat[16].stat_name}</div>
+              <div>{data.detail.final_stat[16].stat_value}</div>
+            </div>
+            <div>
+              <div>{data.detail.final_stat[17].stat_name}</div>
+              <div>{data.detail.final_stat[17].stat_value}</div>
+            </div>
+            <div>
+              <div>{data.detail.final_stat[18].stat_name}</div>
+              <div>{data.detail.final_stat[18].stat_value}</div>
+            </div>
+            <div>
+              <div>{data.detail.final_stat[19].stat_name}</div>
+              <div>{data.detail.final_stat[19].stat_value}</div>
+            </div>
           </div>
         </div>}
         {activeTab === 2 && <div>Content for Tab 2</div>}

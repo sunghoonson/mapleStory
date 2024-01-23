@@ -35,6 +35,7 @@
   margin: 10px;
   border-radius: 10px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+  height: 25px;
 }
 
 .flex-item {
@@ -52,4 +53,27 @@
   text-align: right; /* 마지막 아이템의 텍스트를 오른쪽 정렬 */
   margin-right: 10px;
   color: white;
+}
+.stat-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2개의 열 */
+  grid-template-rows: repeat(3, 1fr); /* 3개의 행 */
+  gap: 5px; /* 간격 */
+  box-sizing: border-box; /* 총 크기가 패딩을 포함하도록 설정 */
+  background-color: #a8a8a8;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.stat-container > div {
+  display: flex;
+  justify-content: space-between; /* name과 value를 양 끝으로 배치 */
+}
+
+/* 선택적: 추가 스타일링 */
+.stat-container > div > div {
+  padding: 5px;
+  color: white;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
 }
