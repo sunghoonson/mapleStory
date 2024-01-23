@@ -70,8 +70,6 @@ function ModalComponent({ itemData }) {
     // 상태 업데이트
     setItems(newItems);
   };
-  
-    
 
   return (
     <DndProvider backend={HTML5Backend}>

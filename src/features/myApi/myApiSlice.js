@@ -1,6 +1,6 @@
 // features/myApi/myApiSlice.js
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchCharacterId, fetchCharacterData as fetchCharacterDetails,fetchItemData as fetchItemApi, fetchItemSet_EffectData as fetchItemSetEffectData } from './mapleStoryApi.js';
+import { fetchCharacterId, fetchCharacterData as fetchCharacterDetails,fetchItemData as fetchItemApi, fetchItemSet_EffectData as fetchItemSetEffectData, fetchCharacterStat } from './mapleStoryApi.js';
 
 //어제 날짜 가져오기
 const getYesterdayDate = () => {
@@ -47,11 +47,15 @@ export const fetchItemSet_EffectData = createAsyncThunk(
       const state = getState();
       const ocid = state.myApi.ocid;
       const data = await fetchItemSetEffectData(ocid, getYesterdayDate());
-
-
-      if (data) {
-        console.log(data)
-        return data;
+      const data2 = await fetchCharacterStat(ocid, getYesterdayDate());
+      // 객체를 사용하여 데이터를 묶습니다.
+      const mergeData = {
+        set: data,    // 'set' 키에 data 할당
+        detail: data2 // 'detail' 키에 data2 할당
+      };
+      if (mergeData) {
+        console.log(mergeData)
+        return mergeData;
       } else {
         throw new Error("Invalid ocid or no ocid in first response");
       }

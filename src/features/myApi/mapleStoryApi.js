@@ -21,6 +21,16 @@ if (!response.ok) throw new Error('Network response was not ok');
     return response.json();
   };
 
+  export const fetchCharacterStat = async (ocid,yesterdayDate) => {//캐릭터 기본 정보 호출
+    const response = await fetch(`https://open.api.nexon.com/maplestory/v1/character/stat?ocid=${ocid}&date=${yesterdayDate}`, {
+    headers: {
+        "x-nxopen-api-key": API_KEY
+    }
+});
+if (!response.ok) throw new Error('Network response was not ok');
+    return response.json();
+  };
+
 
 export const fetchItemData = async (ocid, yesterdayDate) => { //캐릭터 장비 아이템 호출
     const response = await fetch(`https://open.api.nexon.com/maplestory/v1/character/item-equipment?ocid=${ocid}&date=${yesterdayDate}`, {

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
-import './css/InfoModalComponent.css';
-import './css/DetailModalComponent.css';
+import './css/InfoModalComponent.css?after';
+import './css/DetailModalComponent.css?after';
 import { closeModal } from '../features/myModalSlice';
 import Draggable from 'react-draggable';
 
@@ -44,7 +44,7 @@ function ModalComponent() {
               <div className="infomodal-detail-button" onClick={handleDetailClick}>DETAIL</div>
             </div>
           </div>
-          {showDetail && <DetailModal/>}
+          {showDetail && <DetailModal data={setItem}/>}
         </div>
       </div>
     </Draggable>
@@ -52,7 +52,7 @@ function ModalComponent() {
 }
 
 // 디테일 모달 컴포넌트
-function DetailModal({ onClose }) {
+function DetailModal({ data }) {
   // 현재 활성화된 탭을 관리하는 상태
   const [activeTab, setActiveTab] = useState(1);
 
@@ -63,7 +63,6 @@ function DetailModal({ onClose }) {
 
 return (
     <div className="detail-modal">
-      <div className="infomodalcharacter-info">Character Info</div>
       <div className="tabs">
         <button onClick={() => handleTabClick(1)}>Tab 1</button>
         <button onClick={() => handleTabClick(2)}>Tab 2</button>
@@ -72,7 +71,14 @@ return (
         <button onClick={() => handleTabClick(5)}>Tab 5</button>
       </div>
       <div className="tab-content">
-        {activeTab === 1 && <div>Content for Tab 1</div>}
+        {activeTab === 1 && 
+        <div>
+          <div className="flex-container">
+            <div className="flex-item">{data.detail.final_stat[42].stat_name}</div>
+            <div className="flex-item">{data.detail.final_stat[42].stat_value}</div>
+            <div className="flex-item">?</div>
+          </div>
+        </div>}
         {activeTab === 2 && <div>Content for Tab 2</div>}
         {activeTab === 3 && <div>Content for Tab 3</div>}
         {activeTab === 4 && <div>Content for Tab 4</div>}
