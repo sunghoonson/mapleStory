@@ -5,13 +5,20 @@ import { fetchCharacterId, fetchCharacterData as fetchCharacterDetails,fetchItem
 //어제 날짜 가져오기
 const getYesterdayDate = () => {
   const today = new Date();
-  const yesterday = new Date(today);
+  const adjustedDate = new Date(today);
 
-  yesterday.setDate(yesterday.getDate() - 1); // 하루를 빼줌
+  // 오전 9시 이전인지 확인
+  if (today.getHours() < 9) {
+    // 오전 9시 이전이면 이틀 전 날짜를 가져옴
+    adjustedDate.setDate(today.getDate() - 2);
+  } else {
+    // 오전 9시 이후면 하루 전 날짜를 가져옴
+    adjustedDate.setDate(today.getDate() - 1);
+  }
 
-  const year = yesterday.getFullYear();
-  const month = String(yesterday.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줌
-  const day = String(yesterday.getDate()).padStart(2, '0');
+  const year = adjustedDate.getFullYear();
+  const month = String(adjustedDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줌
+  const day = String(adjustedDate.getDate()).padStart(2, '0');
 
   return `${year}-${month}-${day}`;
 };
