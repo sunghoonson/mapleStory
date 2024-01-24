@@ -1,4 +1,4 @@
-// App.js
+// App.js pull
 import React from 'react';
 import './App.css';
 import MyComponent from './component/MyComponent'; // 임포트
