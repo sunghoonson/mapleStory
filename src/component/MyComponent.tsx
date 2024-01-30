@@ -1,23 +1,21 @@
 import React, { useState } from 'react'; // useState를 React에서 임포트
 import { useSelector, useDispatch } from 'react-redux'; // useSelector와 useDispatch를 react-redux에서 임포트
-import { fetchCharacterData } from '../features/myApi/myApiSlice'; // fetchCharacter를 해당 위치에서 임포트
+import { fetchCharacterData } from '../features/myApi/myApiSlice.tsx'; // fetchCharacter를 해당 위치에서 임포트
 import './css/MyComponent.css'; // CSS 파일을 임포트
-import ModalComponent from './ModalComponent';
-import InfoModalComponent from './InfoModalComponent';
-import { openModal } from '../features/myModalSlice'; // openModal을 임포트
-import { fetchItemData,fetchItemSet_EffectData } from '../features/myApi/myApiSlice';
+import ModalComponent from './ModalComponent.tsx';
+import InfoModalComponent from './InfoModalComponent.tsx';
+import { openModal } from '../features/myModalSlice.js'; // openModal을 임포트
+import { fetchItemData,fetchItemSet_EffectData } from '../features/myApi/myApiSlice.tsx';
+import {RootState} from './types';
+import { AppDispatch } from '../app/store.ts';
 
 function MyComponent() {
-
-  const modalsState = useSelector((state) => state.myModal.modals);
-  const isModalOpen = modalsState.modal
-  const isInfoModalOpen = modalsState.infomodal
-  const dispatch = useDispatch();
-  const { data, loading, error } = useSelector((state) => state.myApi);
+  // useDispatch, useSelector 사용
+  const dispatch = useDispatch<AppDispatch>(); // AppDispatch 타입을 사용
+  const { data, loading, error, item: itemData, ocid } = useSelector((state: RootState) => state.myApi);
+  const { modals: { modal: isModalOpen, infomodal: isInfoModalOpen } } = useSelector((state: RootState) => state.myModal);
   const [characterName, setCharacterName] = useState('');
-  const ocid = useSelector(state => state.myApi.ocid);
-  const itemData = useSelector(state => state.myApi.item); // API를 통해 가져온 데이터
-  const isLoading = useSelector(state => state.myApi.loading); // 로딩 상태 확인
+  const isLoading = useSelector((state: RootState) => state.myApi.loading); // RootState 타입을 사용
 
   const handleOpenModal = () => {
     dispatch(openModal({modalName: 'modal'}));
@@ -36,10 +34,11 @@ function MyComponent() {
     setCharacterName(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // HTML의 submit 관련 고유 동작 중단시키기
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (characterName) {
-      dispatch(fetchCharacterData(characterName));
+      // 문자열 인자를 직접 전달
+      dispatch(fetchCharacterData(characterName)); 
     }
   };
 

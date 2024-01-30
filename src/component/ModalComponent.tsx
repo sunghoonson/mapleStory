@@ -6,21 +6,25 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDispatch } from 'react-redux';
 import { closeModal } from '../features/myModalSlice';
 import './css/ModalComponent.css';
-import DraggableImage from './DraggableImage';
-import Tooltip from './Tooltip';
+import DraggableImage from './DraggableImage.tsx';
+import Tooltip from './Tooltip.tsx';
+import {Item, ModalComponentProps} from './types';
 
-function ModalComponent({ itemData }) {
+function ModalComponent({ itemData }: ModalComponentProps) {
   const dispatch = useDispatch();
-  const [items, setItems] = useState(itemData.item_equipment);
-  const [tooltip, setTooltip] = useState(null);
+  const [items] = useState<ModalComponentProps["itemData"] | null | undefined>(itemData);
+  const [tooltip, setTooltip] = useState<ModalComponentProps["itemData"] | null | undefined>();
 
   const handleClose = () => {
     dispatch(closeModal({modalName: 'modal'}));
   };
 
-  const handleClick = (itemName) => {
-    const item = items.find(item => item.item_name === itemName);
-    setTooltip(item); // 클릭된 아이템의 정보로 툴팁 설정
+  const handleClick = (itemName: string) => {
+    const item = items?.item_equipment?.find((item: { item_name: string; }) => item.item_name === itemName);
+    console.log(item)
+    if (item) { // tooltipData가 있는 경우에만 setTooltip 호출
+      setTooltip(item);
+    }
   };
 
   const handleCloseTooltip = () => {
@@ -29,7 +33,7 @@ function ModalComponent({ itemData }) {
 
   useEffect(() => {
     // Escape 키 이벤트 핸들러
-    const handleEscape = (e) => {
+    const handleEscape = (e: { key: string; }) => {
       if (e.key === 'Escape') {
         handleCloseTooltip();
       }
@@ -53,23 +57,23 @@ function ModalComponent({ itemData }) {
     };
   }, [tooltip]); // 의존성 배열에 tooltip 추가
 
-  const moveImage = (dragIndex, hoverIndex) => {
-    const newItems = [...items];
-    const dragItem = {...newItems[dragIndex]};
-    const hoverItem = {...newItems[hoverIndex]};
+  // const moveImage = (dragIndex: number, hoverIndex: number) => {
+  //   const newItems = [{...items}];
+  //   const dragItem = {...newItems[dragIndex]};
+  //   const hoverItem = {...newItems[hoverIndex]};
   
-    // gridArea 속성 교환
-    const tempGridArea = dragItem.gridArea;
-    dragItem.gridArea = hoverItem.gridArea;
-    hoverItem.gridArea = tempGridArea;
+  //   // gridArea 속성 교환
+  //   const tempGridArea = dragItem.gridArea;
+  //   dragItem.gridArea = hoverItem.gridArea;
+  //   hoverItem.gridArea = tempGridArea;
   
-    // 아이템 위치 변경
-    newItems[dragIndex] = hoverItem;
-    newItems[hoverIndex] = dragItem;
+  //   // 아이템 위치 변경
+  //   newItems[dragIndex] = hoverItem;
+  //   newItems[hoverIndex] = dragItem;
   
-    // 상태 업데이트
-    setItems(newItems);
-  };
+  //   // 상태 업데이트
+  //   setItems(newItems);
+  // };
 
   return (
     <DndProvider backend={HTML5Backend}>
@@ -80,7 +84,7 @@ function ModalComponent({ itemData }) {
               <button onClick={handleClose}>Close</button>
             </div>
             <div className="modal-content">
-              {items.map((item, index) => {
+              {items?.item_equipment?.map((item : Item, index: number) => {
               const style = { gridArea: item.gridArea || 'auto' }; // gridArea가 없다면 'auto' 사용
               return (
                 <div key={item.id} className="item-container" style={style} onClick={() => handleClick(item.item_name)}>
@@ -89,7 +93,6 @@ function ModalComponent({ itemData }) {
                     src={item.item_icon}
                     name={item.item_name}
                     index={index}
-                    moveImage={moveImage}
                     handleClick={handleClick} // Make sure the prop is named correctly
                   />
                   <div className="item-label">{item.item_equipment_slot}</div> {/* 아이템 이름 라벨 추가 */}
@@ -97,7 +100,7 @@ function ModalComponent({ itemData }) {
               )})}
               {tooltip && (
                 <Tooltip
-                  tooltip={tooltip}
+                  tooltip={tooltip} 
                   // posX={tooltip.posX}
                   // posY={tooltip.posY}
                 />

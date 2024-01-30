@@ -1,6 +1,7 @@
 // features/myApi/myApiSlice.js
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchCharacterId, fetchCharacterData as fetchCharacterDetails,fetchItemData as fetchItemApi, fetchItemSet_EffectData as fetchItemSetEffectData, fetchCharacterStat } from './mapleStoryApi.js';
+import {ItemData, RootState,MyApiState,CharacterData} from '../../component/types.ts'
 
 //어제 날짜 가져오기
 const getYesterdayDate = () => {
@@ -25,7 +26,7 @@ const getYesterdayDate = () => {
 // 이 함수를 사용하여 어제 날짜를 얻고 API 요청에 사용
 const yesterdayDate = getYesterdayDate();
 
-export const fetchCharacterData = createAsyncThunk(
+export const fetchCharacterData = createAsyncThunk<CharacterData | null, string>(
   'myApi/fetchCharacterData',
   async (characterName, { dispatch }) => {
     try {
@@ -47,11 +48,11 @@ export const fetchCharacterData = createAsyncThunk(
   }
 );
 
-export const fetchItemSet_EffectData = createAsyncThunk(
+export const fetchItemSet_EffectData = createAsyncThunk<any, void>(
   'myApi/fetchItemSet_EffectData',
   async (_, { getState }) => {
     try {
-      const state = getState();
+      const state = getState() as RootState; // RootState 타입 적용;
       const ocid = state.myApi.ocid;
       const data = await fetchItemSetEffectData(ocid, getYesterdayDate());
       const data2 = await fetchCharacterStat(ocid, getYesterdayDate());
@@ -110,11 +111,11 @@ function calculateGridArea(itemSlot) {
   return gridAreaMap[itemSlot] || "기본값"; // 기본값 설정
 }
 
-export const fetchItemData = createAsyncThunk(
+export const fetchItemData = createAsyncThunk<ItemData | null, void>(
   'myApi/fetchItem',
   async (_, { getState }) => {
     try {
-      const state = getState();
+      const state = getState() as RootState; // RootState 타입 적용;;
       const ocid = state.myApi.ocid;
       const data = await fetchItemApi(ocid, getYesterdayDate());
       
@@ -141,9 +142,9 @@ export const myApiSlice = createSlice({
       ocid: null, // ocid 상태 추가
       loading: false,
       error: null,
-    },
+    } as MyApiState,
     reducers: {
-      setOcid: (state, action) => { // ocid를 설정하는 reducer 추가
+      setOcid: (state, action: PayloadAction<string | null>) => { // ocid를 설정하는 reducer 추가
         state.ocid = action.payload;
       },
     },
@@ -159,7 +160,7 @@ export const myApiSlice = createSlice({
       })
       .addCase(fetchCharacterData.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message ?? null;
         state.data = null; // 에러 발생 시 데이터 초기화
       })
       .addCase(fetchItemData.pending, (state) => {
@@ -171,7 +172,7 @@ export const myApiSlice = createSlice({
       })
       .addCase(fetchItemData.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message ?? null;
       })
       .addCase(fetchItemSet_EffectData.pending, (state) => {
         state.loading = true;
@@ -182,7 +183,7 @@ export const myApiSlice = createSlice({
       })
       .addCase(fetchItemSet_EffectData.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.error.message ?? null;
       });
     },
   });
