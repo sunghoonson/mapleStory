@@ -1,9 +1,10 @@
-// DraggableImage.js
 import React from 'react';
 import useDragDrop from '../utils/userDragDrop';
+import { DraggableImageProps } from './types';
 
-function DraggableImage({ id, src, name, index, moveImage,handleClick }) {
-  const dragDropRef = useDragDrop(id, index, moveImage);
+//const DraggableImage = ({ id, src, name, index, moveImage, handleClick }: DraggableImageProps) => {
+  const DraggableImage = ({ id, src, name, index, handleClick }: DraggableImageProps) => {
+  const dragDropRef = useDragDrop(id, index);
 
   return (
     <div 

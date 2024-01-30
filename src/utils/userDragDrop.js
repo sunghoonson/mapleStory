@@ -1,7 +1,7 @@
 // useDragDrop.js
 import { useDrag, useDrop } from 'react-dnd';
 
-function useDragDrop(id, index, moveImage) {
+function useDragDrop(id, index) {
   const [, dragRef] = useDrag(() => ({
     type: "image",
     item: { id, index },
@@ -11,7 +11,7 @@ function useDragDrop(id, index, moveImage) {
     accept: "image",
     hover(item) {
       if (item.index !== index) {
-        moveImage(item.index, index);
+        //moveImage(item.index, index);
         item.index = index;
       }
     },

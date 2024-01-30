@@ -1,16 +1,20 @@
 import React from 'react';
+import { TooltipData } from './types';
 
-function Tooltip({ tooltip}) {
+function Tooltip({ tooltip}: TooltipData) {
   // 값이 0, null, 또는 undefined가 아닌지 확인하는 함수
-  const shouldRender = value => {
-    if (typeof value === 'string' && value !== '0') {
-      // Replace newline characters with <br> tags and return as HTML
+  const shouldRender = (value: string | number | boolean | null | undefined): {__html: string} | undefined => {
+    if (typeof value === 'string' && value !== '0' && value !== '') {
+      // 유효한 문자열인 경우: newline 문자를 <br> 태그로 대체
       return { __html: value.replace(/\n/g, '<br>') };
-    } else {
-      // Check if value is not null, undefined, zero (as number or string)
-      return value !== null && value !== undefined && value !== '0' && value !== 0;
+    } else if (value !== null && value !== undefined && value !== '0' && value !== 0) {
+      // value가 boolean, number이면서 유효한 값인 경우: 문자열로 변환
+      return { __html: String(value) };
     }
+    // 유효하지 않은 값인 경우: undefined 반환
+    return undefined;
   };
+  
   
   function getOptionGradeColor(grade) {
     switch (grade) {

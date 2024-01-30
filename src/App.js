@@ -1,7 +1,7 @@
 // App.js pull
 import React from 'react';
 import './App.css';
-import MyComponent from './component/MyComponent'; // 임포트
+import MyComponent from './component/MyComponent.tsx'; // 임포트
 import Header from './Header';
 
 function App() {
