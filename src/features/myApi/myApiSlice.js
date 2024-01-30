@@ -7,7 +7,7 @@ const getYesterdayDate = () => {
   const today = new Date();
   const yesterday = new Date(today);
 
-  yesterday.setDate(yesterday.getDate() - 1); // 하루를 빼줌
+  yesterday.setDate(yesterday.getDate() - 2); // 하루를 빼줌
 
   const year = yesterday.getFullYear();
   const month = String(yesterday.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줌
