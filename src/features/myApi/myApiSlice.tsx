@@ -1,6 +1,6 @@
 // features/myApi/myApiSlice.js
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { fetchCharacterId, fetchCharacterData as fetchCharacterDetails,fetchItemData as fetchItemApi, fetchItemSet_EffectData as fetchItemSetEffectData, fetchCharacterStat } from './mapleStoryApi.js';
+import { fetchCharacterId, fetchCharacterData as fetchCharacterDetails,fetchItemData as fetchItemApi, fetchItemSet_EffectData as fetchItemSetEffectData, fetchCharacterStat } from './mapleStoryApi.ts';
 import {ItemData, RootState,MyApiState,CharacterData} from '../../component/types.ts'
 
 //어제 날짜 가져오기
@@ -53,7 +53,7 @@ export const fetchItemSet_EffectData = createAsyncThunk<any, void>(
   async (_, { getState }) => {
     try {
       const state = getState() as RootState; // RootState 타입 적용;
-      const ocid = state.myApi.ocid;
+      const ocid: string = state.myApi.ocid;
       const data = await fetchItemSetEffectData(ocid, getYesterdayDate());
       const data2 = await fetchCharacterStat(ocid, getYesterdayDate());
       // 객체를 사용하여 데이터를 묶습니다.
@@ -139,12 +139,12 @@ export const myApiSlice = createSlice({
       data: null,
       item: null, // 아이템 데이터 상태 추가
       setItem: null,
-      ocid: null, // ocid 상태 추가
+      ocid: "", // ocid 상태 추가
       loading: false,
       error: null,
     } as MyApiState,
     reducers: {
-      setOcid: (state, action: PayloadAction<string | null>) => { // ocid를 설정하는 reducer 추가
+      setOcid: (state, action: PayloadAction<string>) => { // ocid를 설정하는 reducer 추가
         state.ocid = action.payload;
       },
     },

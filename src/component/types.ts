@@ -17,7 +17,7 @@ export interface MyApiState {
     data: CharacterData | null;
     item: ItemData | null;
     setItem: SetItemType | null;
-    ocid: string | null;
+    ocid: string;
     loading: boolean;
     error: string | null;
   }
