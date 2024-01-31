@@ -82,7 +82,7 @@ function ModalComponent({ itemData }: ModalComponentProps) {
         <div className="modal" ref={draggableRef}>
           <div className="modal-inner">
             <div className="modal-header">
-              <button onClick={handleClose}>Close</button>
+              <button onTouchEnd={handleClose}>Close</button>
             </div>
             <div className="modal-content">
               {items?.item_equipment?.map((item : Item, index: number) => {
