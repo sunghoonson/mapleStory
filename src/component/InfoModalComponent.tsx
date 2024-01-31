@@ -22,7 +22,7 @@ const ModalComponent: React.FC<InfoModalComponentProps> =({ocid}) => {
   const { data, setItem } = useSelector((state: RootState) => state.myApi);
   console.log(setItem)
   return (
-    <Draggable handle=".infomodal-header" nodeRef={draggableRef}>
+    <Draggable handle=".infomodal-header" cancel='button' nodeRef={draggableRef}>
       <div className="infomodal" ref={draggableRef}>
         <div className="infomodal-inner">
           <div className="infomodal-header">
