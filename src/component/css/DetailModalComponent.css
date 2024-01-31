@@ -1,13 +1,13 @@
 /* DetailModalComponent.css */
 .detail-modal {
   width: 100%; /* 부모 컨테이너의 폭을 상속받아서 같은 폭을 가집니다 */
+  max-height: 90vh; /* 뷰포트 높이의 90%를 최대 높이로 설정 */
+  overflow-y: auto; /* 내용이 최대 높이를 초과할 경우 세로 스크롤바를 표시 */
   background: #5f5f5f; /* 배경색을 설정합니다 */
   border-top: 1px solid #ccc; /* 상단에 경계선을 추가합니다 */
   box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.2); /* 상단에 그림자 효과를 줍니다 */
   margin-top: 2px;
   z-index: 100; /* 필요한 경우 z-index를 조정합니다 */
-  /* border-top-right-radius: 10px; */
-  /* border-top-left-radius: 10px; */
   border-radius: 10px;
 }
 
@@ -76,4 +76,35 @@
   padding: 5px;
   color: white;
   text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+.stat-middle-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2개의 열 */
+  grid-template-rows: repeat(3, 1fr); /* 3개의 행 */
+  gap: 5px; /* 간격 */
+  box-sizing: border-box; /* 총 크기가 패딩을 포함하도록 설정 */
+  background-color: #7c7c7c;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 10px;
+}
+
+.stat-middle-container > div {
+  display: flex;
+  justify-content: space-between; /* name과 value를 양 끝으로 배치 */
+}
+
+/* 선택적: 추가 스타일링 */
+.stat-middle-container > div > div {
+  padding: 5px;
+  color: white;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
+}
+
+@media (max-width: 768px) { /* 모바일 기기와 작은 화면을 위한 미디어 쿼리 */
+  .detail-modal {
+    max-height: 45vh; /* 모바일 화면에서는 최대 높이를 더 줄입니다 */
+    overflow-y: auto; /* 필요시 세로로 스크롤 가능 */
+  }
 }

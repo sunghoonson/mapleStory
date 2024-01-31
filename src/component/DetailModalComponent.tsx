@@ -21,6 +21,18 @@ export function DetailModal({ data }: DetailModalProps) {
     return parts.join('.');
   };
 
+  const StatDisplay = ({ stat }) => (
+    <div>
+      <div>{stat.stat_name}</div>
+      <div>{stat.stat_value}</div>
+    </div>
+  );  
+
+  const desiredStatName = ["HP","MP","STR","DEX","INT","LUK"]
+  const desiredStatMiddleName = ["최대 스탯공격력","데미지","최종 데미지","보스 몬스터 데미지","방어율 무시","일반 몬스터 데미지",
+                                "공격력","크리티컬 확률","마력","크리티컬 데미지","재사용 대기시간 감소","버프 지속 시간","재사용 대기시간 미적용"
+                                ,"속성 내성 무시","상태이상 추가 데미지","무기 숙련도"]
+
 return (
     <div className="detail-modal">
       <div className="tabs">
@@ -39,30 +51,30 @@ return (
             <div className="flex-item">?</div>
           </div>
           <div className='stat-container'>
-            <div>
-              <div>{data?.detail.final_stat[20].stat_name}</div>
-              <div>{data?.detail.final_stat[20].stat_value}</div>
-            </div>
-            <div>
-              <div>{data?.detail.final_stat[21].stat_name}</div>
-              <div>{data?.detail.final_stat[21].stat_value}</div>
-            </div>
-            <div>
-              <div>{data?.detail.final_stat[16].stat_name}</div>
-              <div>{data?.detail.final_stat[16].stat_value}</div>
-            </div>
-            <div>
-              <div>{data?.detail.final_stat[17].stat_name}</div>
-              <div>{data?.detail.final_stat[17].stat_value}</div>
-            </div>
-            <div>
-              <div>{data?.detail.final_stat[18].stat_name}</div>
-              <div>{data?.detail.final_stat[18].stat_value}</div>
-            </div>
-            <div>
-              <div>{data?.detail.final_stat[19].stat_name}</div>
-              <div>{data?.detail.final_stat[19].stat_value}</div>
-            </div>
+            {
+             desiredStatName
+             .map(statName => 
+               data?.detail.final_stat.find(stat => stat.stat_name === statName))
+             .map((stat, index) => {
+               if (stat) {
+                 return <StatDisplay key={index} stat={stat} />;
+               }
+               return null;
+             })
+            }
+          </div>
+          <div className='stat-middle-container'>
+          {
+             desiredStatMiddleName
+             .map(statName => 
+               data?.detail.final_stat.find(stat => stat.stat_name === statName))
+             .map((stat, index) => {
+               if (stat) {
+                 return <StatDisplay key={index} stat={stat} />;
+               }
+               return null;
+             })
+            }
           </div>
         </div>}
         {activeTab === 2 && <div>Content for Tab 2</div>}

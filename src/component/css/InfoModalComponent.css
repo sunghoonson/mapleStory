@@ -163,6 +163,8 @@
   .infomodal-content {
     /* grid-template-columns: 1fr; 모바일 화면에서는 열 하나만 표시 */
     grid-template-columns: repeat(3, 1fr);
+    max-height: 30vh; /* 모바일 화면에서는 최대 높이를 더 줄입니다 */
   }
   /* 추가적인 스타일 조정 */
+
 }

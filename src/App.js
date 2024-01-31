@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="grid-container">
       <div className="header-hover-area"></div>
-      <Header />
+      {/* <Header /> */}
       {[...Array(9)].map((_, index) => (
         <div className="grid-item" key={index}>
           {index === 4 ? <MyComponent /> : `영역 ${index + 1}`}

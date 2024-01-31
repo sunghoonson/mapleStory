@@ -67,7 +67,6 @@ export interface ItemData {
     item_icon: string;
     item_equipment_slot: string;
     gridArea?: string;
-    tooltip:TooltipData;
 
     potential_option_2: any;
     potential_option_3: any;
@@ -105,7 +104,6 @@ export interface TooltipData {
   
  export interface ModalComponentProps {
     itemData: ItemData | null;
-    tooltipData?: TooltipData; // TooltipData 필드 추가
   }
 
  export interface ModalsState {
