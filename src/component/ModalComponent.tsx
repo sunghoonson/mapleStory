@@ -78,10 +78,11 @@ function ModalComponent({ itemData }: ModalComponentProps) {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <Draggable handle=".modal-header" nodeRef={draggableRef}>
+      <Draggable handle=".drag-handle" nodeRef={draggableRef}>
         <div className="modal" ref={draggableRef}>
           <div className="modal-inner">
             <div className="modal-header">
+              <div className="drag-handle">Drag here</div> {/* 드래그 가능 영역 명시 */}
               <button onClick={handleClose}>Close</button>
             </div>
             <div className="modal-content">

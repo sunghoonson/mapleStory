@@ -21,12 +21,15 @@ const ModalComponent: React.FC<InfoModalComponentProps> =({ocid}) => {
   const { data, setItem } = useSelector((state: RootState) => state.myApi);
   console.log(setItem)
   return (
-    <Draggable handle=".infomodal-header" nodeRef={draggableRef}>
+    <Draggable handle=".drag-handle" nodeRef={draggableRef}>
       <div className="infomodal" ref={draggableRef}>
         <div className="infomodal-inner">
           <div className="infomodal-header">
             <div className="infomodalcharacter-info">Character Info</div>
-            <div><button onClick={handleClose}>X</button></div>
+            <div>
+              <div className="drag-handle">Drag here</div> {/* 드래그 가능 영역 명시 */}
+              <button onClick={handleClose}>X</button>
+            </div>
           </div>
           <div className="infomodal-content">
             <div className="infogrid-item1">
