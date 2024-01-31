@@ -2,7 +2,7 @@
 import React from 'react';
 import './App.css';
 import MyComponent from './component/MyComponent.tsx'; // 임포트
-import Header from './Header';
+//import Header from './Header';
 
 function App() {
   return (
