@@ -1,5 +1,5 @@
 // ModalComponent.js
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useRef } from 'react';
 import Draggable from 'react-draggable';
 import { DndProvider} from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
@@ -14,7 +14,8 @@ function ModalComponent({ itemData }: ModalComponentProps) {
   const dispatch = useDispatch();
   const [items] = useState<ModalComponentProps["itemData"] | null | undefined>(itemData);
   const [tooltip, setTooltip] = useState<ModalComponentProps["itemData"] | null | undefined>();
-
+  const draggableRef = useRef(null);
+  
   const handleClose = () => {
     dispatch(closeModal({modalName: 'modal'}));
   };
@@ -77,8 +78,8 @@ function ModalComponent({ itemData }: ModalComponentProps) {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <Draggable handle=".modal-header">
-        <div className="modal">
+      <Draggable handle=".modal-header" nodeRef={draggableRef}>
+        <div className="modal" ref={draggableRef}>
           <div className="modal-inner">
             <div className="modal-header">
               <button onClick={handleClose}>Close</button>
@@ -87,7 +88,7 @@ function ModalComponent({ itemData }: ModalComponentProps) {
               {items?.item_equipment?.map((item : Item, index: number) => {
               const style = { gridArea: item.gridArea || 'auto' }; // gridArea가 없다면 'auto' 사용
               return (
-                <div key={item.id} className="item-container" style={style} onClick={() => handleClick(item.item_name)}>
+                <div key={index} className="item-container" style={style} onClick={() => handleClick(item.item_name)}>
                   <DraggableImage
                     id={item.id}
                     src={item.item_icon}

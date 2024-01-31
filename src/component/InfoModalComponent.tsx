@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import './css/InfoModalComponent.css?after';
 import { closeModal } from '../features/myModalSlice.ts';
@@ -8,6 +8,7 @@ import { DetailModal } from './DetailModalComponent.tsx'
 
 const ModalComponent: React.FC<InfoModalComponentProps> =({ocid}) => {
   const dispatch = useDispatch();
+  const draggableRef = useRef(null);
   const handleClose = () => {
     dispatch(closeModal({modalName: 'infomodal'}));
   };
@@ -20,8 +21,8 @@ const ModalComponent: React.FC<InfoModalComponentProps> =({ocid}) => {
   const { data, setItem } = useSelector((state: RootState) => state.myApi);
   console.log(setItem)
   return (
-    <Draggable handle=".infomodal-header">
-      <div className="infomodal">
+    <Draggable handle=".infomodal-header" nodeRef={draggableRef}>
+      <div className="infomodal" ref={draggableRef}>
         <div className="infomodal-inner">
           <div className="infomodal-header">
             <div className="infomodalcharacter-info">Character Info</div>

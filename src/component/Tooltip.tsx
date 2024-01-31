@@ -16,7 +16,7 @@ function Tooltip({ tooltip}: TooltipData) {
   };
   
   
-  function getOptionGradeColor(grade) {
+  function getOptionGradeColor(grade: string | undefined) {
     switch (grade) {
       case '레어':
        return 'skyblue';
