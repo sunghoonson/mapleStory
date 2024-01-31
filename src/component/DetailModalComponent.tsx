@@ -32,6 +32,7 @@ export function DetailModal({ data }: DetailModalProps) {
   const desiredStatMiddleName = ["최대 스탯공격력","데미지","최종 데미지","보스 몬스터 데미지","방어율 무시","일반 몬스터 데미지",
                                 "공격력","크리티컬 확률","마력","크리티컬 데미지","재사용 대기시간 감소","버프 지속 시간","재사용 대기시간 미적용"
                                 ,"속성 내성 무시","상태이상 추가 데미지","무기 숙련도"]
+  const desiredStatLowName = ["메소 획득량","스타포스","아이템 드롭률","아케인포스","추가 경험치 획득","어센틱포스"]
 
 return (
     <div className="detail-modal">
@@ -66,6 +67,19 @@ return (
           <div className='stat-middle-container'>
           {
              desiredStatMiddleName
+             .map(statName => 
+               data?.detail.final_stat.find(stat => stat.stat_name === statName))
+             .map((stat, index) => {
+               if (stat) {
+                 return <StatDisplay key={index} stat={stat} />;
+               }
+               return null;
+             })
+            }
+          </div>
+          <div className='stat-low-container'>
+          {
+             desiredStatLowName
              .map(statName => 
                data?.detail.final_stat.find(stat => stat.stat_name === statName))
              .map((stat, index) => {
