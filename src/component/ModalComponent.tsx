@@ -16,7 +16,8 @@ function ModalComponent({ itemData }: ModalComponentProps) {
   const [tooltip, setTooltip] = useState<ModalComponentProps["itemData"] | null | undefined>();
   const draggableRef = useRef(null);
   
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.stopPropagation(); // 드래그 시작을 방지하기 위해 이벤트 전파 중단
     dispatch(closeModal({modalName: 'modal'}));
   };
 
@@ -78,11 +79,10 @@ function ModalComponent({ itemData }: ModalComponentProps) {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <Draggable handle=".drag-handle" nodeRef={draggableRef}>
+      <Draggable handle=".modal-header" nodeRef={draggableRef}>
         <div className="modal" ref={draggableRef}>
           <div className="modal-inner">
             <div className="modal-header">
-              <div className="drag-handle">Drag here</div> {/* 드래그 가능 영역 명시 */}
               <button onClick={handleClose}>Close</button>
             </div>
             <div className="modal-content">

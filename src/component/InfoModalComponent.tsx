@@ -9,7 +9,8 @@ import { DetailModal } from './DetailModalComponent.tsx'
 const ModalComponent: React.FC<InfoModalComponentProps> =({ocid}) => {
   const dispatch = useDispatch();
   const draggableRef = useRef(null);
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.stopPropagation(); // 드래그 시작을 방지하기 위해 이벤트 전파 중단
     dispatch(closeModal({modalName: 'infomodal'}));
   };
   // showDetail 상태와 상태를 설정하는 함수 setShowDetail을 추가합니다.
@@ -21,15 +22,12 @@ const ModalComponent: React.FC<InfoModalComponentProps> =({ocid}) => {
   const { data, setItem } = useSelector((state: RootState) => state.myApi);
   console.log(setItem)
   return (
-    <Draggable handle=".drag-handle" nodeRef={draggableRef}>
+    <Draggable handle=".infomodal-header" nodeRef={draggableRef}>
       <div className="infomodal" ref={draggableRef}>
         <div className="infomodal-inner">
           <div className="infomodal-header">
             <div className="infomodalcharacter-info">Character Info</div>
-            <div>
-              <div className="drag-handle">Drag here</div> {/* 드래그 가능 영역 명시 */}
-              <button onClick={handleClose}>X</button>
-            </div>
+            <div><button onClick={handleClose}>X</button></div>
           </div>
           <div className="infomodal-content">
             <div className="infogrid-item1">
