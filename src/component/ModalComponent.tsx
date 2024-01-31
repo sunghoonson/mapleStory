@@ -4,7 +4,7 @@ import Draggable from 'react-draggable';
 import { DndProvider} from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDispatch } from 'react-redux';
-import { closeModal } from '../features/myModalSlice';
+import { closeModal } from '../features/myModalSlice.ts';
 import './css/ModalComponent.css';
 import DraggableImage from './DraggableImage.tsx';
 import Tooltip from './Tooltip.tsx';

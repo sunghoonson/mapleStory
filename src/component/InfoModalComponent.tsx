@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch,useSelector } from 'react-redux';
 import './css/InfoModalComponent.css?after';
-import { closeModal } from '../features/myModalSlice';
+import { closeModal } from '../features/myModalSlice.ts';
 import Draggable from 'react-draggable';
 import { RootState,InfoModalComponentProps  } from './types';
 import { DetailModal } from './DetailModalComponent.tsx'

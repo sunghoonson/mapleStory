@@ -4,7 +4,7 @@ import { fetchCharacterData } from '../features/myApi/myApiSlice.tsx'; // fetchC
 import './css/MyComponent.css'; // CSS 파일을 임포트
 import ModalComponent from './ModalComponent.tsx';
 import InfoModalComponent from './InfoModalComponent.tsx';
-import { openModal } from '../features/myModalSlice.js'; // openModal을 임포트
+import { openModal } from '../features/myModalSlice.ts'; // openModal을 임포트
 import { fetchItemData,fetchItemSet_EffectData } from '../features/myApi/myApiSlice.tsx';
 import {RootState} from './types';
 import { AppDispatch } from '../app/store.ts';
