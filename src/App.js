@@ -7,7 +7,7 @@ import Header from './Header';
 function App() {
   return (
     <div className="grid-container">
-      <div className="header-hover-area"></div>
+      {/* <div className="header-hover-area"></div> */}
       {/* <Header /> */}
       {[...Array(9)].map((_, index) => (
         <div className="grid-item" key={index}>
