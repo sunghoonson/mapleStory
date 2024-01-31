@@ -82,13 +82,13 @@ function ModalComponent({ itemData }: ModalComponentProps) {
         <div className="modal" ref={draggableRef}>
           <div className="modal-inner">
             <div className="modal-header">
-              <button onTouchEnd={handleClose}>Close</button>
+              <button onClick={handleClose}>Close</button>
             </div>
             <div className="modal-content">
               {items?.item_equipment?.map((item : Item, index: number) => {
               const style = { gridArea: item.gridArea || 'auto' }; // gridArea가 없다면 'auto' 사용
               return (
-                <div key={index} className="item-container" style={style} onTouchEnd ={() => handleClick(item.item_name)}>
+                <div key={index} className="item-container" style={style} onClick={() => handleClick(item.item_name)}>
                   <DraggableImage
                     id={item.id}
                     src={item.item_icon}
