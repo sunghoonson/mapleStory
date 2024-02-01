@@ -43,12 +43,15 @@ export interface SetItemType{
 }
 
 export interface setHyperStatType{
-    hyper_stat: {
+    
       date: string;
       character_calss: string;
       use_preset_no: string;
       use_available_hyper_stat: number;
-    }
+      hyper_stat_preset_1:any[];
+      hyper_stat_preset_2:any[];
+      hyper_stat_preset_3:any[];
+    
 }
 
   // itemData의 타입 정의
