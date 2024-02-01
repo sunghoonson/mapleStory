@@ -17,6 +17,17 @@ export interface MyApiState {
     data: CharacterData | null;
     item: ItemData | null;
     setItem: SetItemType | null;
+    setHyperStat: setHyperStatType | null;
+    ocid: string;
+    loading: boolean;
+    error: string | null;
+  }
+
+  export interface MyhyperStatState {
+    data: CharacterData | null;
+    item: ItemData | null;
+    setItem: SetItemType | null;
+    setHyperStat: setHyperStatType | null;
     ocid: string;
     loading: boolean;
     error: string | null;
@@ -29,6 +40,15 @@ export interface SetItemType{
         }>;
         // 다른 필드들...
     };
+}
+
+export interface setHyperStatType{
+    hyper_stat: {
+      date: string;
+      character_calss: string;
+      use_preset_no: string;
+      use_available_hyper_stat: number;
+    }
 }
 
   // itemData의 타입 정의
@@ -117,6 +137,7 @@ export interface RootState {
     myModal: {
       modals: ModalsState;
     };
+    hyperStat:MyhyperStatState;
   }
   
  export interface CharacterData {
@@ -134,4 +155,8 @@ export interface RootState {
 
  export interface InfoModalComponentProps {
     ocid: string | null; // ocid prop을 추가합니다.
+  }
+
+  export interface HyperStatModalProps {
+    data: setHyperStatType | null;
   }

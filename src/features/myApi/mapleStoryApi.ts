@@ -51,3 +51,13 @@ export const fetchItemSet_EffectData = async (ocid: string, yesterdayDate: strin
     if (!response.ok) throw new Error('Network response was not ok');
     return response.json();
   };
+
+  export const fetchHyperStat = async (ocid: string, yesterdayDate: string): Promise<any> => { //캐릭터 적용 세트 효과 정보 조회
+    const response = await fetch(`https://open.api.nexon.com/maplestory/v1/character/hyper-stat?ocid=${ocid}&date=${yesterdayDate}`, {
+      headers: {
+        "x-nxopen-api-key": API_KEY
+      }
+    });
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.json();
+  };

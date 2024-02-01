@@ -4,23 +4,42 @@ import './css/InfoModalComponent.css?after';
 import { closeModal } from '../features/myModalSlice.ts';
 import Draggable from 'react-draggable';
 import { RootState,InfoModalComponentProps  } from './types';
-import { DetailModal } from './DetailModalComponent.tsx'
+import DetailModal from './DetailModalComponent.tsx'
+import { HyperStatModal } from './HyperStatModalComponent.tsx';
+import { fetchHyperStatData } from '../features/myApi/hyperStatSlice.ts'; // fetchHyperStatData 해당 위치에서 임포트
+import { AppDispatch } from '../app/store.ts';
 
-const ModalComponent: React.FC<InfoModalComponentProps> =({ocid}) => {
+const ModalComponent: React.FC<InfoModalComponentProps> =() => {
   const dispatch = useDispatch();
+  const dispatchType = useDispatch<AppDispatch>(); // AppDispatch 타입을 사용
+
   const draggableRef = useRef(null);
-  const handleClose = (e) => {
-    e.stopPropagation(); // 드래그 시작을 방지하기 위해 이벤트 전파 중단
+  const handleClose = () => {
     dispatch(closeModal({modalName: 'infomodal'}));
   };
   // showDetail 상태와 상태를 설정하는 함수 setShowDetail을 추가합니다.
   const [showDetail, setShowDetail] = useState(false);
-  const handleDetailClick = () => {
-    setShowDetail(!showDetail); // 디테일 버튼 클릭 시 상태를 true로 변경하여 모달을 표시
+  const [showHyperStat, setShowHyperStat] = useState(false);
+
+  const handleHyperStatClick = () => {
+    // `fetchHyperStatData`가 promise를 반환하도록 가정
+    dispatchType(fetchHyperStatData()).then(() => {
+      // 데이터 로딩이 완료된 후 상태 업데이트
+      setShowHyperStat(!showHyperStat);
+    }).catch((error) => {
+      // 오류 처리 (필요한 경우)
+      console.error("Failed to fetch hyper stat data:", error);
+    });
   };
 
+  function handleDetailClick() {
+    setShowDetail(!showDetail); // 디테일 버튼 클릭 시 상태를 true로 변경하여 모달을 표시
+  }
+
   const { data, setItem } = useSelector((state: RootState) => state.myApi);
+  const { setHyperStat } = useSelector((state: RootState) => state.hyperStat);
   console.log(setItem)
+
   return (
     <Draggable handle=".infomodal-header" cancel='button' nodeRef={draggableRef}>
       <div className="infomodal" ref={draggableRef}>
@@ -46,7 +65,8 @@ const ModalComponent: React.FC<InfoModalComponentProps> =({ocid}) => {
               <div className="infomodal-detail-button" onClick={handleDetailClick}>DETAIL</div>
             </div>
           </div>
-          {showDetail && <DetailModal data={setItem}/>}
+          {showDetail && <DetailModal data={setItem} onHyperStatClick={handleHyperStatClick}/>}
+          {showHyperStat && <HyperStatModal data={setHyperStat}/>}
         </div>
       </div>
     </Draggable>

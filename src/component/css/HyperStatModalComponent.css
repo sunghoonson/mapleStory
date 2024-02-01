@@ -1,0 +1,8 @@
+/* HyperStatModalComponent.css */
+.hyperstat-modal {
+  /* 기존 스타일링 */
+  z-index: 1000; /* 충분히 높은 값을 설정하여 다른 요소 위에 표시 */
+  visibility: visible; /* 가시성 확인 */
+  display: block; /* 블록 레벨 요소로 표시 */
+  opacity: 1; /* 완전히 불투명하게 설정 */
+}

@@ -1,33 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import './css/DetailModalComponent.css?after';
 import { DetailModalProps } from './types';
 
-// 디테일 모달 컴포넌트
-export function DetailModal({ data }: DetailModalProps) {
-  // 현재 활성화된 탭을 관리하는 상태
+// DetailModal 컴포넌트 정의
+// `DetailModalProps & { onHyperStatClick: () => void }`는 props의 타입을 정의합니다.
+// 이 타입은 DetailModalProps 타입에 onHyperStatClick 함수를 추가한 것입니다.
+const DetailModal: React.FC<DetailModalProps & { onHyperStatClick: () => void }> = ({ data, onHyperStatClick }) => {
   const [activeTab, setActiveTab] = useState(1);
-
-  const handleTabClick = (tabNumber: number) => { //탭 클릭 핸들러
+  
+  // 탭 클릭 핸들러
+  const handleTabClick = (tabNumber: number) => {
     setActiveTab(tabNumber);
   };
 
+  // 숫자에 콤마 추가하는 함수
   const addCommas = (number?: number): string => {
-    if (number === undefined) return ""; // 또는 적절한 기본값 반환
-    // 숫자를 문자열로 변환
+    if (number === undefined) return "";
     const numStr = number.toString();
-    // 소수점 분리
     const parts = numStr.split('.');
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
   };
 
+  // 스탯 표시 컴포넌트
   const StatDisplay = ({ stat }) => (
     <div>
       <div>{stat.stat_name}</div>
       <div>{stat.stat_value}</div>
     </div>
-  );  
+  );
 
+  // 원하는 스탯 이름 배열
   const desiredStatName = ["HP","MP","STR","DEX","INT","LUK"]
   const desiredStatMiddleName = ["최대 스탯공격력","데미지","최종 데미지","보스 몬스터 데미지","방어율 무시","일반 몬스터 데미지",
                                 "공격력","크리티컬 확률","마력","크리티컬 데미지","재사용 대기시간 감소","버프 지속 시간","재사용 대기시간 미적용"
@@ -90,6 +93,10 @@ return (
              })
             }
           </div>
+          <div>
+            <button onClick={onHyperStatClick}>하이퍼 스텟</button>
+            <button onClick={() => handleTabClick(1)}>어빌리티</button>
+          </div>
         </div>}
         {activeTab === 2 && <div>Content for Tab 2</div>}
         {activeTab === 3 && <div>Content for Tab 3</div>}
@@ -97,6 +104,8 @@ return (
         {activeTab === 5 && <div>Content for Tab 5</div>}
       </div>
     </div>
+    
   );
 }
 
+export default DetailModal;

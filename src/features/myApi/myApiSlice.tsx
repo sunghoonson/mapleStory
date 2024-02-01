@@ -2,27 +2,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchCharacterId, fetchCharacterData as fetchCharacterDetails,fetchItemData as fetchItemApi, fetchItemSet_EffectData as fetchItemSetEffectData, fetchCharacterStat } from './mapleStoryApi.ts';
 import {ItemData, RootState,MyApiState,CharacterData} from '../../component/types.ts'
+import { getYesterdayDate } from '../../utils/util.ts'
 
-//어제 날짜 가져오기
-const getYesterdayDate = () => {
-  const today = new Date();
-  const adjustedDate = new Date(today);
-
-  // 오전 9시 이전인지 확인
-  if (today.getHours() < 9) {
-    // 오전 9시 이전이면 이틀 전 날짜를 가져옴
-    adjustedDate.setDate(today.getDate() - 2);
-  } else {
-    // 오전 9시 이후면 하루 전 날짜를 가져옴
-    adjustedDate.setDate(today.getDate() - 1);
-  }
-
-  const year = adjustedDate.getFullYear();
-  const month = String(adjustedDate.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 1을 더해줌
-  const day = String(adjustedDate.getDate()).padStart(2, '0');
-
-  return `${year}-${month}-${day}`;
-};
 // 이 함수를 사용하여 어제 날짜를 얻고 API 요청에 사용
 const yesterdayDate = getYesterdayDate();
 
@@ -72,6 +53,20 @@ export const fetchItemSet_EffectData = createAsyncThunk<any, void>(
     }
   }
 );
+
+// export const fetchHyperStatData = createAsyncThunk<any, void>(
+//   'myApi/fetchHyperStatData',
+//   async (_, { getState }) => {
+//     try {
+//       const state = getState() as RootState; // RootState 타입 적용;
+//       const ocid: string = state.myApi.ocid;
+//       const data = await fetchHyperStat(ocid, getYesterdayDate());
+//       return data
+//     } catch (error) {
+//       throw error;
+//     }
+//   }
+// );
 
 function calculateGridArea(itemSlot) {
   const gridAreaMap = {
@@ -185,8 +180,18 @@ export const myApiSlice = createSlice({
         state.loading = false;
         state.error = action.error.message ?? null;
       });
+      // .addCase(fetchHyperStatData.pending, (state) => {
+      //   state.loading = true;
+      // })
+      // .addCase(fetchHyperStatData.fulfilled, (state, action) => {
+      //   state.loading = false;
+      //   state.setHyperStat = action.payload; // 하이퍼스탯 데이터 저장
+      // })
+      // .addCase(fetchHyperStatData.rejected, (state, action) => {
+      //   state.loading = false;
+      //   state.error = action.error.message ?? null;
+      // });
     },
   });
   export const { setOcid } = myApiSlice.actions; // 액션 생성자 내보내기
   export default myApiSlice.reducer;
-  

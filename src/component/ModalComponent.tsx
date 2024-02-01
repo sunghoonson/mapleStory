@@ -16,8 +16,7 @@ function ModalComponent({ itemData }: ModalComponentProps) {
   const [tooltip, setTooltip] = useState<ModalComponentProps["itemData"] | null | undefined>();
   const draggableRef = useRef(null);
   
-  const handleClose = (e) => {
-    e.stopPropagation(); // 드래그 시작을 방지하기 위해 이벤트 전파 중단
+  const handleClose = () => {
     dispatch(closeModal({modalName: 'modal'}));
   };
 
