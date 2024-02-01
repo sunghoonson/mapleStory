@@ -8,11 +8,11 @@ import './index.css';
 
 const root = document.getElementById('root');
 const rootElement = (
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 const rootContainer = ReactDOM.createRoot(root); // No change needed here

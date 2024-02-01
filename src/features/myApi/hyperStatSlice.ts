@@ -11,7 +11,7 @@ export const fetchHyperStatData = createAsyncThunk<any, void>(
         const state = getState() as RootState; // RootState 타입 적용;
         const ocid: string = state.myApi.ocid;
         const data = await fetchHyperStat(ocid, getYesterdayDate());
-        console.log(data)
+        
         return data
       } catch (error) {
         throw error;

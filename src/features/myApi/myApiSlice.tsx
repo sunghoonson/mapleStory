@@ -43,7 +43,7 @@ export const fetchItemSet_EffectData = createAsyncThunk<any, void>(
         detail: data2 // 'detail' 키에 data2 할당
       };
       if (mergeData) {
-        console.log(mergeData)
+        //console.log(mergeData)
         return mergeData;
       } else {
         throw new Error("Invalid ocid or no ocid in first response");

@@ -38,7 +38,7 @@ const ModalComponent: React.FC<InfoModalComponentProps> =() => {
 
   const { data, setItem } = useSelector((state: RootState) => state.myApi);
   const { setHyperStat } = useSelector((state: RootState) => state.hyperStat);
-  console.log(setItem)
+  //console.log(setItem)
 
   return (
     <Draggable handle=".infomodal-header" cancel='button' nodeRef={draggableRef}>
