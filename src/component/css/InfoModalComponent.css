@@ -21,6 +21,12 @@
   /* width: 600px; 모달창의 너비를 고정값으로 설정, 필요에 따라 조정 */
   /* box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15); 외부 그림자 추가 */
 }
+.addmodal-container {
+  position: absolute; /* 또는 position: fixed; */
+  max-width: calc(100% + 200px); /* 하이퍼스탯 모달을 포함한 너비 */
+  /* 필요하다면 높이 설정 */
+  
+}
 
 .infomodal-header {
   background-color: #5f5f5f; /* 배경 색상을 콘텐츠와 동일하게 설정 */

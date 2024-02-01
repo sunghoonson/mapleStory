@@ -34,6 +34,9 @@ const ModalComponent: React.FC<InfoModalComponentProps> =() => {
 
   function handleDetailClick() {
     setShowDetail(!showDetail); // 디테일 버튼 클릭 시 상태를 true로 변경하여 모달을 표시
+    if(showHyperStat === true){
+      setShowHyperStat(!showHyperStat);
+    }
   }
 
   const { data, setItem } = useSelector((state: RootState) => state.myApi);
@@ -65,10 +68,13 @@ const ModalComponent: React.FC<InfoModalComponentProps> =() => {
               <div className="infomodal-detail-button" onClick={handleDetailClick}>DETAIL</div>
             </div>
           </div>
-          {showDetail && <DetailModal data={setItem} onHyperStatClick={handleHyperStatClick}/>}
-          {showHyperStat && <HyperStatModal data={setHyperStat}/>}
+          <div className='addmodal-container'>
+            {showHyperStat && <HyperStatModal data={setHyperStat}/>}
+            {showDetail && <DetailModal data={setItem} onHyperStatClick={handleHyperStatClick}/>}
+          </div>
         </div>
       </div>
+      
     </Draggable>
   );
 }
