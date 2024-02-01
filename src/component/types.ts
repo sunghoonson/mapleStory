@@ -129,6 +129,7 @@ export interface TooltipData {
  export interface ModalsState {
     modal: boolean;
     infomodal: boolean;
+    hyperstatmodal: boolean;
   }
 
 // Redux 전체 스토어의 상태를 나타내는 인터페이스

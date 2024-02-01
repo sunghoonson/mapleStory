@@ -129,7 +129,9 @@
 
 @media (max-width: 768px) { /* 모바일 기기와 작은 화면을 위한 미디어 쿼리 */
   .detail-modal {
-    max-height: 45vh; /* 모바일 화면에서는 최대 높이를 더 줄입니다 */
+    max-height: 40vh; /* 모바일 화면에서는 최대 높이를 더 줄입니다 */
     overflow-y: auto; /* 필요시 세로로 스크롤 가능 */
+    padding: 10px;
+    min-width : auto;
   }
 }

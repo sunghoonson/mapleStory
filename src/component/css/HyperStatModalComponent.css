@@ -11,6 +11,29 @@
   z-index: 100; /* 필요한 경우 z-index를 조정합니다 */
   border-radius: 10px;
   position: absolute;
-  left: -202px;
+  left: 455px;
   height: 55vh;
+}
+
+
+/* 미디어 쿼리를 사용하여 다양한 화면 크기에 대응 */
+@media screen and (max-width: 768px) {
+  .hyperstat-modal {
+    position: relative;
+    left: auto;
+    width: 100%;
+    height: 30vh;
+  }
+  /* 추가적인 스타일 조정 */
+}
+
+@media screen and (max-width: 480px) {
+   .hyperstat-modal {
+    position: relative;
+    left: auto;
+    width: 100%;
+    height: 30vh;
+  }
+  /* 추가적인 스타일 조정 */
+
 }

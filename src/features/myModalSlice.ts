@@ -5,6 +5,7 @@ interface ModalState {
   modal: boolean;
   infomodal: boolean;
   // 추가 모달 상태...
+  hyperstatmodal: boolean;
 }
 
 interface MyModalState {
@@ -15,6 +16,7 @@ const initialState: MyModalState = {
   modals: {
     modal: false,
     infomodal: false,
+    hyperstatmodal: false,
     // 추가 모달 상태...
   },
 };
@@ -37,8 +39,14 @@ const myModalSlice = createSlice({
         state.modals[modalName] = false;
       }
     },
+    toggleModal:(state, action: PayloadAction<{ modalName: keyof ModalState }>) => {
+      const { modalName } = action.payload;
+      if (state.modals[modalName] !== undefined) {
+        state.modals[modalName] = !state.modals[modalName];
+      }
+    },
   },
 });
 
-export const { openModal, closeModal } = myModalSlice.actions;
+export const { openModal, closeModal,toggleModal } = myModalSlice.actions;
 export default myModalSlice.reducer;
