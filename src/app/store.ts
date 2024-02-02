@@ -3,7 +3,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import myApiReducer from '../features/myApi/myApiSlice.tsx';
 import myModalReducer from '../features/myModalSlice.ts';
 import hyperStatSlice from '../features/myApi/hyperStatSlice.ts'
-import tooltipReducer from '../features/myApi/tooltipSlice.ts';
+import tooltipReducer from '../features/myApi/positiontooltipSlice.ts';
 
 export const store = configureStore({
   reducer: {

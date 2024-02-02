@@ -4,7 +4,7 @@ import './css/HyperStatModalComponent.css?after';
 import { HyperStatModalProps } from './types';
 import { closeModal } from '../features/myModalSlice.ts';
 import PositionTooltip from './PositionTooltip.tsx'; // Tooltip 컴포넌트 경로에 맞게 조정
-import { showTooltip, hideTooltip } from '../features/myApi/tooltipSlice.ts';
+import { showTooltip, hideTooltip } from '../features/myApi/positiontooltipSlice.ts';
 import { RootState } from '../app/store.ts'; // 경로는 실제 구조에 맞게 조정
 
 // 스탯 표시 컴포넌트
