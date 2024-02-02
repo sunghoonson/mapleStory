@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/mapleStory/static/css/main.76b7d277.css",
-    "main.js": "/mapleStory/static/js/main.2f37e325.js",
+    "main.css": "/mapleStory/static/css/main.06c59630.css",
+    "main.js": "/mapleStory/static/js/main.d8bac641.js",
     "index.html": "/mapleStory/index.html",
-    "main.76b7d277.css.map": "/mapleStory/static/css/main.76b7d277.css.map",
-    "main.2f37e325.js.map": "/mapleStory/static/js/main.2f37e325.js.map"
+    "main.06c59630.css.map": "/mapleStory/static/css/main.06c59630.css.map",
+    "main.d8bac641.js.map": "/mapleStory/static/js/main.d8bac641.js.map"
   },
   "entrypoints": [
-    "static/css/main.76b7d277.css",
-    "static/js/main.2f37e325.js"
+    "static/css/main.06c59630.css",
+    "static/js/main.d8bac641.js"
   ]
 }
