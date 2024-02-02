@@ -14,11 +14,15 @@
   align-items: center;
   border: 1px solid lightgray; /* 경계선 표시 */
   transition: background-color 0.3s; /* 배경색 변경 효과 */
+  background-size: cover;
+  background-position: center;
 }
 
 .grid-item:hover {
   background-color: lightblue; /* 마우스 호버 시 배경색 변경 */
 }
+
+.grid-item-4 { background-image: url('//i.namu.wiki/i/shhaot-6Cm1mAs36kChoJiKBweDLXUnjS-rkVG-byRPWeGb9oMpD5mBMw8RHmb5a_5yYVPHyNc8Lk4peTg3LlbpXLU3kHdLslTfy95noeuCj8WCatAC2AbLsiVZEi4mbOS9YfJH8BZgIHXVIJK0DgA.webp'); }
 
 /* 화면 크기에 따른 미디어 쿼리 */
 @media screen and (max-width: 768px) {

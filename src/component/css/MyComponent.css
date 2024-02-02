@@ -1,4 +1,4 @@
-/* App.css 또는 해당 컴포넌트의 CSS 파일 */
-
-
+.character-info-box {
+    background-color: rgba(0, 0, 0, 0.6); /* 검정색 배경에 불투명도 50% */
+  }
   

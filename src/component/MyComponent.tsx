@@ -60,7 +60,7 @@ function MyComponent() {
       {error && <p>Error: {error}</p>} {/* 에러 메시지 조건부 렌더링 */}
 
       {data && (
-        <div>
+        <div className='character-info-box'>
           <h3>Character Information</h3>
           {/* <div><strong>Date:</strong> {data.date}</div> */}
           <div><strong>Name:</strong> {data.character_name}<button type="button" onClick={handleOpenInfoModal}>캐릭터 상세정보

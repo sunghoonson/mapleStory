@@ -10,8 +10,8 @@ function App() {
       {/* <div className="header-hover-area"></div> */}
       {/* <Header /> */}
       {[...Array(9)].map((_, index) => (
-        <div className="grid-item" key={index}>
-          {index === 4 ? <MyComponent /> : `영역 ${index + 1}`}
+        <div className={`grid-item grid-item-${index}`} key={index}>
+          <div style={{ color: 'white' }}>{index === 4 ? <MyComponent /> : `영역 ${index + 1}`}</div>
         </div>
       ))}
     </div>
