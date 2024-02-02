@@ -66,6 +66,18 @@
   text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.8);
 }
 
+.stat_increase_box {
+  background-color: rgba(0, 0, 0, 0.7); /* 어두운 반투명 배경 */
+  padding: 10px; /* 적당한 패딩 */
+  border-radius: 5px; /* 모서리를 약간 둥글게 */
+}
+
+.stat_increase {
+  color: white; /* 텍스트 색상을 흰색으로 */
+  font-weight: bold; /* 글자를 굵게 */
+}
+
+
 /* 미디어 쿼리를 사용하여 다양한 화면 크기에 대응 */
 @media screen and (max-width: 768px) {
   .hyperstat-modal {
