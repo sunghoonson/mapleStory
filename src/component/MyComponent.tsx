@@ -54,7 +54,7 @@ function MyComponent() {
           onChange={handleInputChange}
           placeholder="Enter character name"
         />
-        <button type="submit">Fetch Character</button>
+        <button type="submit">캐릭터 검색</button>
       </form>
       
       {error && <p>Error: {error}</p>} {/* 에러 메시지 조건부 렌더링 */}
@@ -63,7 +63,7 @@ function MyComponent() {
         <div>
           <h3>Character Information</h3>
           {/* <div><strong>Date:</strong> {data.date}</div> */}
-          <div><strong>Name:</strong> {data.character_name}<button type="button" onClick={handleOpenInfoModal}>캐릭터 정보
+          <div><strong>Name:</strong> {data.character_name}<button type="button" onClick={handleOpenInfoModal}>캐릭터 상세정보
             </button>{isInfoModalOpen && <InfoModalComponent ocid={ocid}/>}
                     {isInfoModalOpen && isLoading && <div>로딩 중...</div>}
           </div>
