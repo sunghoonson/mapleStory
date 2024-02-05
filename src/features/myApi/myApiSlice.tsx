@@ -68,7 +68,7 @@ export const fetchItemSet_EffectData = createAsyncThunk<any, void>(
 //   }
 // );
 
-function calculateGridArea(itemSlot) {
+function calculateGridArea(itemSlot: string | number) {
   const gridAreaMap = {
     '반지4': "1 / 1 / 1 / 2",
     '반지3': "2 / 1 / 2 / 2",
